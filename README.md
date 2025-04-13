@@ -52,12 +52,8 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/534fc53b-aad2-4569-a54a-59dde46de407) and click on Share -> Publish.
+You can deploy this project using Vercel or any other hosting service that supports React applications.
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to my project?
 
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Yes, you can connect a custom domain to your deployed project through your hosting provider's domain settings.
