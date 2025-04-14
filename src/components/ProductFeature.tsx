@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,7 +10,7 @@ interface ProductFeatureProps {
   imagePosition?: 'left' | 'right';
   productName1?: string;
   productName2?: string;
-  imageSide?: 'left' | 'right';
+  titleAlignment?: 'left' | 'right' | 'center';
 }
 
 const ProductFeature: React.FC<ProductFeatureProps> = ({
@@ -22,7 +21,7 @@ const ProductFeature: React.FC<ProductFeatureProps> = ({
   imagePosition = 'left',
   productName1 = "",
   productName2 = "",
-  imageSide = 'right'
+  titleAlignment = 'left'
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -30,6 +29,8 @@ const ProductFeature: React.FC<ProductFeatureProps> = ({
   const image2Ref = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -55,6 +56,13 @@ const ProductFeature: React.FC<ProductFeatureProps> = ({
       duration: 0.8 
     }, "-=0.5");
   }, [imagePosition]);
+
+  // Set text alignment classes
+  const textAlignClass = {
+    left: "text-left md:text-left",
+    right: "text-center md:text-right",
+    center: "text-center"
+  }[titleAlignment];
   
   return (
     <div 
@@ -63,7 +71,7 @@ const ProductFeature: React.FC<ProductFeatureProps> = ({
     >
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between">
-          {imageSide === 'left' && (
+          {imagePosition === 'left' && (
             <div className="w-full md:w-1/2 mb-12 md:mb-0">
               <div className="grid grid-cols-2 gap-6">
                 <div ref={image1Ref} className="relative">
@@ -92,7 +100,7 @@ const ProductFeature: React.FC<ProductFeatureProps> = ({
 
           <div 
             ref={titleRef}
-            className="w-full md:w-1/2 text-center md:text-left"
+            className={`w-full md:w-1/2 ${textAlignClass}`}
           >
             <h2 className="font-serif italic text-3xl md:text-4xl mb-6">{title}</h2>
             <button className="inline-block mt-4 border border-black px-6 py-2 text-sm hover:bg-black hover:text-white transition-colors">
@@ -100,7 +108,7 @@ const ProductFeature: React.FC<ProductFeatureProps> = ({
             </button>
           </div>
           
-          {imageSide === 'right' && (
+          {imagePosition === 'right' && (
             <div className="w-full md:w-1/2 mt-12 md:mt-0">
               <div className="grid grid-cols-2 gap-6">
                 <div ref={image1Ref} className="relative">
