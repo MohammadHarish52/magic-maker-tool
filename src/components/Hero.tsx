@@ -47,11 +47,11 @@ const Hero: React.FC = () => {
         ref={textRef}
         className="absolute inset-0 z-10 hidden md:flex md:flex-col md:items-center md:justify-center md:text-center md:px-6"
       >
-        <h1 className="font-serif italic text-9xl lg:text-[10rem] mb-0 text-white leading-tight">
-          True <span className="text-8xl lg:text-9xl">to</span> Oneself
+        <h1 className="font-serif italic text-7xl lg:text-8xl mb-0 text-white leading-tight">
+          True <span className="text-6xl lg:text-7xl">to</span> Oneself
         </h1>
-        <h2 className="font-serif italic text-8xl lg:text-9xl text-white leading-tight">
-          kind <span className="text-7xl lg:text-8xl">to</span>{" "}
+        <h2 className="font-serif italic text-6xl lg:text-7xl text-white leading-tight">
+          kind <span className="text-5xl lg:text-6xl">to</span>{" "}
           <span className="italic">Nature</span>
         </h2>
         <p className="mt-4 text-white text-base lg:text-lg max-w-2xl">
