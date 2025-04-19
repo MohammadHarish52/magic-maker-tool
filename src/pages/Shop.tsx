@@ -83,57 +83,63 @@ const Shop: React.FC = () => {
     product: Product;
     delay: number;
     isLoading: boolean;
-  }) => (
-    <ScrollReveal delay={delay} className="card-hover">
-      <div
-        className={cn(
-          "bg-truekind-cream/30 p-4 rounded-sm transition-all duration-300 hover:shadow-md",
-          "focus-within:ring-2 focus-within:ring-black focus-within:ring-opacity-50"
-        )}
-        tabIndex={0}
-      >
-        <div className="h-[300px] mb-4 overflow-hidden relative">
+  }) => {
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    return (
+      <ScrollReveal delay={delay} className="card-hover">
+        <div
+          className={cn(
+            "bg-truekind-cream/30 p-4 rounded-sm transition-all duration-300 hover:shadow-md",
+            "focus-within:ring-2 focus-within:ring-black focus-within:ring-opacity-50"
+          )}
+          tabIndex={0}
+        >
+          <div className="h-[300px] mb-4 overflow-hidden relative">
+            {isLoading ? (
+              <Skeleton className="w-full h-full absolute inset-0" />
+            ) : (
+              <img
+                src={product.image}
+                alt={product.name}
+                loading="lazy"
+                className={cn(
+                  "w-full h-full object-cover transition-transform duration-700 hover:scale-105",
+                  "transition-opacity duration-500",
+                  imageLoaded ? "opacity-100" : "opacity-0"
+                )}
+                onLoad={() => setImageLoaded(true)}
+              />
+            )}
+          </div>
           {isLoading ? (
-            <Skeleton className="w-full h-full absolute inset-0" />
+            <>
+              <Skeleton className="h-6 w-3/4 mb-2" />
+              <Skeleton className="h-5 w-1/4 mb-4" />
+              <Skeleton className="h-10 w-1/2" />
+            </>
           ) : (
-            <img
-              src={product.image}
-              alt={product.name}
-              loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              onLoad={(e) => e.currentTarget.classList.add("loaded")}
-              style={{ opacity: 0, transition: "opacity 0.5s" }}
-              onAnimationEnd={(e) => (e.currentTarget.style.opacity = "1")}
-            />
+            <>
+              <h3 className="font-serif text-xl mb-2">{product.name}</h3>
+              <p className="font-medium">{product.price}</p>
+              <p
+                className="text-sm text-gray-600 mt-1 line-clamp-2"
+                aria-hidden="true"
+              >
+                {product.description}
+              </p>
+              <button
+                className="mt-4 border border-truekind-dark px-4 py-2 text-sm hover:bg-truekind-dark hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
+                aria-label={`Add ${product.name} to cart - ${product.price}`}
+              >
+                Add to Cart
+              </button>
+            </>
           )}
         </div>
-        {isLoading ? (
-          <>
-            <Skeleton className="h-6 w-3/4 mb-2" />
-            <Skeleton className="h-5 w-1/4 mb-4" />
-            <Skeleton className="h-10 w-1/2" />
-          </>
-        ) : (
-          <>
-            <h3 className="font-serif text-xl mb-2">{product.name}</h3>
-            <p className="font-medium">{product.price}</p>
-            <p
-              className="text-sm text-gray-600 mt-1 line-clamp-2"
-              aria-hidden="true"
-            >
-              {product.description}
-            </p>
-            <button
-              className="mt-4 border border-truekind-dark px-4 py-2 text-sm hover:bg-truekind-dark hover:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
-              aria-label={`Add ${product.name} to cart - ${product.price}`}
-            >
-              Add to Cart
-            </button>
-          </>
-        )}
-      </div>
-    </ScrollReveal>
-  );
+      </ScrollReveal>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-white">
